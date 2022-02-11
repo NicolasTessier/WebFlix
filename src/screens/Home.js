@@ -1,3 +1,6 @@
+import Input from "../components/Input";
+import FilmsList from "../components/FilmsList";
+
 function Home() {
   return (
     <div>
@@ -7,6 +10,8 @@ function Home() {
           🎥‍
         </span>
       </h1>
+      <Input />
+      <FilmsList />
     </div>
   );
 }
