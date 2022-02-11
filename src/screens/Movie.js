@@ -7,7 +7,7 @@ function Movie() {
   const params = useParams();
 
   useEffect(() => {
-    const movie = data.movies.find((movie) => (movie.id = params.id));
+    const movie = data.movies.find((movie) => movie.id === Number(params.id));
     setMovie(movie);
   }, [params]);
 
