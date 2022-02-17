@@ -10,7 +10,7 @@ function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState(searchParams.get("q") || "");
 
-  const { data, isLoading, error } = useQuery("movies", () =>
+  const { data, isLoading, error } = useQuery(["movies", value], () =>
     fetchMovies(value)
   );
 
