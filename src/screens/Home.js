@@ -2,8 +2,8 @@ import Input from "../components/Input";
 import MoviesList from "../components/MoviesList";
 import "./Home.css";
 import data from "../data.json";
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
