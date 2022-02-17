@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useState(searchParams.get("q"));
+  const [value, setValue] = useState(searchParams.get("q") || "");
   const onChange = (event) => {
     setValue(event.target.value);
     setSearchParams(event.target.value ? { q: event.target.value } : {});
