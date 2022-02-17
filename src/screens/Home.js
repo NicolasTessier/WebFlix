@@ -3,26 +3,14 @@ import MoviesList from "../components/MoviesList";
 import "./Home.css";
 import data from "../data.json";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function Home() {
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (query) {
-      params.append("q", query);
-    } else {
-      params.delete("q");
-    }
-    navigate({ search: params.toString() });
-  }, [query, navigate]);
-
-  const [value, setValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(searchParams.get("q"));
   const onChange = (event) => {
-    setQuery(event.target.value);
     setValue(event.target.value);
+    setSearchParams(event.target.value ? { q: event.target.value } : {});
   };
   const movies = data.movies.filter((movie) =>
     movie.title.match(new RegExp(value, "i"))
