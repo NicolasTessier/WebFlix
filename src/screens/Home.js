@@ -1,19 +1,25 @@
 import Input from "../components/Input";
 import MoviesList from "../components/MoviesList";
 import "./Home.css";
-import data from "../data.json";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { fetchMovies } from "../ApiHelper";
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState(searchParams.get("q") || "");
-  const onChange = (event) => {
-    setValue(event.target.value);
-    setSearchParams(event.target.value ? { q: event.target.value } : {});
-  };
-  const movies = data.movies.filter((movie) =>
-    movie.title.match(new RegExp(value, "i"))
+
+  const { data, isLoading, error } = useQuery("movies", () =>
+    fetchMovies(value)
+  );
+
+  const onChange = useCallback(
+    (event) => {
+      setValue(event.target.value);
+      setSearchParams(event.target.value ? { q: event.target.value } : {});
+    },
+    [setSearchParams]
   );
 
   return (
@@ -25,7 +31,9 @@ function Home() {
         </span>
       </h1>
       <Input value={value} onChange={onChange} />
-      <MoviesList data={movies} />
+      {isLoading && <p>ça charge</p>}
+      {error && <p>{error}</p>}
+      {!isLoading && !error && <MoviesList data={data?.results} />}
     </div>
   );
 }

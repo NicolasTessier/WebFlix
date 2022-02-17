@@ -1,19 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import data from "../data.json";
+import { useQuery } from "react-query";
+import { fetchMovie } from "../ApiHelper";
 
 function Movie() {
-  const [movie, setMovie] = useState("");
   const params = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const movie = data.movies.find((movie) => movie.id === Number(params.id));
-    if (!movie) navigate("/");
-    setMovie(movie);
-  }, [params, navigate]);
+  const { data, isLoading, error, isFetching } = useQuery("movie", () =>
+    fetchMovie(params.id)
+  );
 
-  return <>{movie ? <p>{movie.title}</p> : <p> Loading ...</p>}</>;
+  useEffect(() => {
+    if (!isFetching && data.success === false) navigate("/");
+  }, [isFetching]);
+
+  return (
+    <>
+      {isLoading && <p>ça charge</p>}
+      {!isLoading && !error && <p>{data.title}</p>}
+    </>
+  );
 }
 
 export default Movie;
