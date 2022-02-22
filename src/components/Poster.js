@@ -9,17 +9,18 @@ const Poster = ({ movie }) => {
 
   const toggleFavourite = (event) => {
     event.preventDefault();
-    const id = movie.id;
-    dispatch(actions.toggle({ id }));
+    dispatch(actions.toggle({ movie }));
   };
 
   const isFavourite = () => {
-    return favourites.includes(movie.id) ? "💛" : "🖤";
+    return favourites.find((favourite) => favourite.id === movie.id)
+      ? "💛"
+      : "🤍";
   };
 
   return (
     <div className="poster">
-      <Link className="test" to={`/movie/${movie.id}`}>
+      <Link to={`/movie/${movie.id}`}>
         {movie.poster_path ? (
           <img
             className="poster_img"
@@ -35,7 +36,9 @@ const Poster = ({ movie }) => {
           <p className="poster_title">{movie.title}</p>
         </div>
       </Link>
-      <div onClick={toggleFavourite}>{isFavourite()}</div>
+      <div className="favourite" onClick={toggleFavourite}>
+        {isFavourite()}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,13 @@
+import "./Input.css";
+
 const Input = ({ value, onChange }) => {
   return (
-    <input value={value} onChange={onChange} placeholder="juste un input" />
+    <input
+      className="input"
+      value={value}
+      onChange={onChange}
+      placeholder="Un super film"
+    />
   );
 };
 

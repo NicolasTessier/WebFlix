@@ -5,9 +5,9 @@ export const { reducer, actions } = createSlice({
   initialState: [],
   reducers: {
     toggle: (state, action) => {
-      return state.includes(action.payload.id)
-        ? state.filter((id) => id !== action.payload.id)
-        : [...state, action.payload.id];
+      return state.find((favourite) => favourite.id === action.payload.movie.id)
+        ? state.filter((movie) => movie.id !== action.payload.movie.id)
+        : [...state, action.payload.movie];
     },
   },
 });

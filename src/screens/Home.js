@@ -5,13 +5,16 @@ import { useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchMovies } from "../ApiHelper";
+import Spinner from "../components/Spinner";
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [value, setValue] = useState(searchParams.get("q") || "");
 
-  const { data, isLoading, error } = useQuery(["movies", value], () =>
-    fetchMovies(value)
+  const { data, isLoading, error } = useQuery(
+    ["movies", value],
+    () => fetchMovies(value),
+    { cacheTime: 0 }
   );
 
   const onChange = useCallback(
@@ -26,14 +29,16 @@ function Home() {
     <div className="home">
       <h1 className="title">
         Bienvenue sur WebFlix
-        <span role="img" aria-label="people">
+        <span role="img" aria-label="camera">
           🎥‍
         </span>
       </h1>
       <Input value={value} onChange={onChange} />
-      {isLoading && <p>ça charge</p>}
+      {isLoading && <Spinner />}
       {error && <p>{error}</p>}
-      {!isLoading && !error && <MoviesList data={data?.results} />}
+      {!isLoading && !error && (
+        <MoviesList data={data?.results} horizontal={false} />
+      )}
     </div>
   );
 }

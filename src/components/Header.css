@@ -1,0 +1,29 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: red 5px solid;
+    background-color: #252525;
+    color: white;
+}
+
+.appName{
+    margin: 0;
+    font-size: 20px;
+}
+
+.icon{
+    margin-left: 10px;
+}
+
+.link{
+    color: white;
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+.active{
+    color: yellow;
+}

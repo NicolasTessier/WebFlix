@@ -11,3 +11,9 @@ export const fetchMovie = (id) => {
     `${process.env.REACT_APP_BASE_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
   ).then((response) => response.json());
 };
+
+export const fetchRecommandations = (id) => {
+  return fetch(
+    `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
+  ).then((response) => response.json());
+};
