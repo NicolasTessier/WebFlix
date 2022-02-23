@@ -22,7 +22,7 @@ function Header() {
           to={"/favourites"}
           className={({ isActive }) => (isActive ? "link active" : "link")}
         >
-          Favourites
+          Favoris
         </NavLink>
       </nav>
     </div>

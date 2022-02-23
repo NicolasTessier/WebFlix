@@ -8,7 +8,7 @@ function Favourites() {
   return (
     <div className="favourites">
       <h1 className="title">
-        Favorites
+        Favoris
         <span role="img" aria-label="heart">
           💛
         </span>

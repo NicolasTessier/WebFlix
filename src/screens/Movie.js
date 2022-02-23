@@ -49,9 +49,10 @@ function Movie() {
               <p className="text">{"Date de sortie " + data.release_date}</p>
               <p className="text">{"Durée " + data.runtime + " minutes"}</p>
               <div className="chipContainer">
-                {data.genres.map((genre) => (
-                  <Chip key={genre.id} label={genre.name} />
-                ))}
+                {data.genre &&
+                  data.genres.map((genre) => (
+                    <Chip key={genre.id} label={genre.name} />
+                  ))}
               </div>
             </div>
           </div>

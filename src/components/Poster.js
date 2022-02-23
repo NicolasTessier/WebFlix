@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Poster.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../favouritesStore";
+import { actions } from "../stores/favouritesStore";
 
 const Poster = ({ movie }) => {
   const favourites = useSelector((state) => state.favourites);
