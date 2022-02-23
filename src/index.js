@@ -8,7 +8,6 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { reducer as favouritesReducer } from "./stores/favouritesStore";
 import { reducer as moviesReducer } from "./stores/moviesStore";
 import { reducer as detailsReducer } from "./stores/detailsStore";
-import { reducer as recommandationsReducer } from "./stores/detailsStore";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import {
