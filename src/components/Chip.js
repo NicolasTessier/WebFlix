@@ -1,10 +1,10 @@
 import "./Chip.css";
 
-function Chip({ label, onPress }) {
+function Chip({ label, onPress, style }) {
   return (
     <>
       {onPress ? (
-        <button onClick={onPress} className="chip">
+        <button onClick={onPress} className={"chip " + style}>
           {label}
         </button>
       ) : (

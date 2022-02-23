@@ -7,3 +7,17 @@
 .title{
     text-align: center;
 }
+
+.filtersDiv{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px 0;
+    font-size: 20px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+}

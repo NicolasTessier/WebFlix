@@ -10,6 +10,8 @@
 
 .no_image{
     background-color: gray;
+    height: 300px;
+    min-width: 200px;
 }
 
 .infos {
@@ -71,5 +73,10 @@ p{
     .img{
         height: 70%;
         min-width: auto;
+    }
+
+    .noImage{
+        height: 600px;
+        min-width: 400px;
     }
 }

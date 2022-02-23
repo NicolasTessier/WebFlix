@@ -13,7 +13,7 @@ function Movie() {
   const navigate = useNavigate();
 
   const { data, isLoading, error, isFetching } = useQuery(
-    "movie",
+    ["movie", params],
     () => fetchMovie(params.id),
     { cacheTime: 0 }
   );
@@ -42,7 +42,7 @@ function Movie() {
                 src={process.env.REACT_APP_API_IMG + data.poster_path}
               />
             ) : (
-              <div className="img no_image" />
+              <div className="img noImage" />
             )}
             <div className="infos_text">
               <p className="title">{data.title}</p>
@@ -59,7 +59,7 @@ function Movie() {
           <h2 className="subtitle">Note du public : </h2>
           <Rating rank={data.vote_average} />
           {loadingReco && <Spinner />}
-          {!loadingReco && !errorReco && (
+          {!loadingReco && !errorReco && recommandations.results.length > 0 && (
             <>
               <h2 className="subtitle">Contenu Similaire : </h2>
               <MoviesList data={recommandations.results} horizontal={true} />
