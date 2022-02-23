@@ -1,12 +1,10 @@
 import Input from "../components/Input";
 import MoviesList from "../components/MoviesList";
 import "./Home.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { fetchMovies } from "../ApiHelper";
-import Spinner from "../components/Spinner";
 import Chip from "../components/Chip";
+import { useDispatch, useSelector } from "react-redux";
 
 const yearFilter = [
   new Date().getFullYear().toString(),
@@ -19,11 +17,13 @@ function Home() {
   const [value, setValue] = useState(searchParams.get("q") || "");
   const [year, setYear] = useState("");
 
-  const { data, isLoading, error } = useQuery(
-    ["movies", value, year],
-    () => fetchMovies(value, year),
-    { cacheTime: 0 }
-  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_MOVIES", value: value, year: year });
+  }, [dispatch, value, year]);
+
+  const movies = useSelector((state) => state.movies);
 
   const onChange = useCallback(
     (event) => {
@@ -64,11 +64,7 @@ function Home() {
           </div>
         </div>
       )}
-      {isLoading && <Spinner />}
-      {error && <p>{error}</p>}
-      {!isLoading && !error && (
-        <MoviesList data={data?.results} horizontal={false} />
-      )}
+      <MoviesList data={movies} horizontal={false} />
     </div>
   );
 }

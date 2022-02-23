@@ -1,4 +1,5 @@
-export const fetchMovies = (value, year) => {
+export const fetchMovies = (params) => {
+  const { value, year } = params;
   const queryString =
     (value ? "query=" + value : "") + (year ? "&year=" + year : "");
   return fetch(
@@ -8,13 +9,15 @@ export const fetchMovies = (value, year) => {
   ).then((response) => response.json());
 };
 
-export const fetchMovie = (id) => {
+export const fetchMovie = (params) => {
+  const id = params.id;
   return fetch(
     `${process.env.REACT_APP_BASE_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
   ).then((response) => response.json());
 };
 
-export const fetchRecommandations = (id) => {
+export const fetchRecommandations = (params) => {
+  const id = params.id;
   return fetch(
     `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
   ).then((response) => response.json());
